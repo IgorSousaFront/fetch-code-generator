@@ -13,3 +13,8 @@ export interface IRequestParams {
   url: string
   port: string 
 }
+
+export interface IRequestContext {
+  requestParams: IRequestParams
+  updateRequestParams?: (param: keyof IRequestParams, value: string) => void
+}

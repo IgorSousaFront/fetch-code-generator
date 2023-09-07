@@ -8,7 +8,7 @@ import { Splitter, SplitterPanel } from 'primereact/splitter'
 import { InputMask } from "primereact/inputmask"
 
 // Types
-import { IDropdownOptionsProps, IRequestParams, IDropdownOptionsWithColors } from './types'
+import { IDropdownOptionsProps, IRequestParams, IDropdownOptionsWithColors } from '../../types'
 import { Editor } from "../Editor";
 
 

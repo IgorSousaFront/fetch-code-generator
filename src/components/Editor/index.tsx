@@ -1,6 +1,3 @@
-// React
-import { useEffect } from "react"
-
 // Components
 import SyntaxHighlighter from "react-syntax-highlighter"
 
