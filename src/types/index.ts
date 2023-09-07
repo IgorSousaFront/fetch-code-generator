@@ -16,5 +16,5 @@ export interface IRequestParams {
 
 export interface IRequestContext {
   requestParams: IRequestParams
-  updateRequestParams?: (param: keyof IRequestParams, value: string) => void
+  updateRequestParams: (param: keyof IRequestParams, value: string) => void
 }

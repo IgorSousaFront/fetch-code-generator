@@ -4,14 +4,16 @@ import 'primeicons/primeicons.css'; //icons
 import 'primeflex/primeflex.css'; // flex
 import './index.css'
 
+import { RequestProvider } from './contexts/request-context';
+
 import Wrapper from './components/Wrapper';
 
 function App() {
 
   return (
-    <>
+    <RequestProvider>
       <Wrapper />
-    </>
+    </RequestProvider>
   )
 }
 

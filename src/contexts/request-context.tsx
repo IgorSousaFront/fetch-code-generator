@@ -11,8 +11,9 @@ const initialValue:IRequestParams = {
   port: ''
 }
 
-const RequestContext = createContext<IRequestContext>({
-  requestParams: initialValue
+export const RequestContext = createContext<IRequestContext>({
+  requestParams: initialValue,
+  updateRequestParams: () => {}
 });
 
 export const RequestProvider = ({

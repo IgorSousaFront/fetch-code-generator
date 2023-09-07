@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 // Components
 import { InputText } from 'primereact/inputtext';
@@ -10,6 +10,9 @@ import { InputMask } from "primereact/inputmask"
 // Types
 import { IDropdownOptionsProps, IRequestParams, IDropdownOptionsWithColors } from '../../types'
 import { Editor } from "../Editor";
+
+// Context
+import { RequestContext } from '../../contexts/request-context'
 
 
 const methodList:IDropdownOptionsWithColors[] = [
@@ -51,15 +54,8 @@ const httpTypeList:IDropdownOptionsProps[] = [
   },
 ]
 
-const initialRequestParams:IRequestParams = {
-  method: 'GET',
-  protocol: 'HTTP',
-  url: '',
-  port: ''
-}
-
 const Wrapper = () => {
-  const [requestConfig, setRequestConfig] = useState<IRequestParams>(initialRequestParams)
+  const { requestParams, updateRequestParams } = useContext(RequestContext)
 
   const selectedCountryTemplate = (option: IDropdownOptionsWithColors, props: any) => {
     if (option) {
@@ -85,12 +81,13 @@ const Wrapper = () => {
     <div className="flex gap-4">
       <Splitter className="w-full h-screen">
         <SplitterPanel className="flex align-items-start">
+          <h1>{requestParams.method}</h1>
           <div className="p-inputgroup">
             <Dropdown
               options={methodList}
               optionLabel="name"
-              value={requestConfig.method}
-              onChange={e => setRequestConfig(prevState => ({...prevState, method: e.value}))}
+              value={requestParams.method}
+              onChange={e => updateRequestParams('method', e.value)}
               valueTemplate={selectedCountryTemplate}
               placeholder="Escolha o verbo https" 
               itemTemplate={countryOptionTemplate}
@@ -98,33 +95,26 @@ const Wrapper = () => {
             <Dropdown
               options={httpTypeList}
               optionLabel="name"
-              value={requestConfig.protocol}
-              onChange={e => setRequestConfig(prevState => ({...prevState, protocol: e.value}))}
+              value={requestParams.protocol}
+              onChange={e => updateRequestParams('protocol', e.value)}
               placeholder="Escolha o protocólo" 
             />
             <InputText
-              value={requestConfig.url}
-              onChange={e => setRequestConfig(prevState => ({...prevState, url: e.target.value}))}
+              value={requestParams.url}
+              onChange={e => updateRequestParams('url', e.target.value)}
               placeholder="URL para a requisição"
             />
 
             <InputMask
-              value={requestConfig.port}
-              onChange={e => setRequestConfig(prevState => ({...prevState, port: e.target.value as string}))}
+              value={requestParams.port}
+              onChange={e => updateRequestParams('port', e.target.value as string)}
               mask=":9999"
               placeholder=":3000"
             />
           </div>
         </SplitterPanel>
         <SplitterPanel>
-          <Editor
-            requestAttr={{
-              method: requestConfig.method,
-              protocol: requestConfig.protocol,
-              url: requestConfig.url,
-              port: requestConfig.port
-            }}
-          />
+          <Editor />
         </SplitterPanel>
       </Splitter>
     </div>
